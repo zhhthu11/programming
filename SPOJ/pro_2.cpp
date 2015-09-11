@@ -3,19 +3,18 @@
 using namespace std;
 
 const int max_num = 200000;
-int check[max_num];
-int prime[max_num];
-int prime_num;
 
 int main(){
     //First step: initialize
+    int *check = new int[max_num];
+    int *prime = new int[max_num];
+    int prime_num = 0;
     for (int i = 0; i < max_num; i++){
         prime[i] = -1;
         check[i] = 1;
     }
     check[0] = 0;
     check[1] = 0;
-    prime_num = 0;
 
     //Second step: find prime numbers between 1 and max_num
     for (int i = 2; i < max_num; i++){
