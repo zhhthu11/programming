@@ -1,22 +1,16 @@
 #include <iostream>
 using namespace std;
 
-int main()
-{
-    int check_num = 42;
+int main(){
+    const int check_num = 42;
     int cur_num;
-    while (true)
-    {
+    while (true){
         cin >> cur_num;
-	if (cur_num == check_num)
-	{
-	    break;
-	}
-	else
-	{
-	    cout << cur_num << endl;
-	}
+        if (cur_num == check_num){
+            break;
+        } else {
+            cout << cur_num << endl;
+        }
     }
-
     return 0;
 }
