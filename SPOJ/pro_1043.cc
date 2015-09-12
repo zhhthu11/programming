@@ -2,7 +2,7 @@
 #include <math.h>
 using namespace std;
 
-int a[50010];
+int a[50000];
 
 //Every TreeNode has a tree_node_score
 struct tree_node_score{
@@ -75,7 +75,7 @@ class TreeNode{
             return right_node_->GetQueryScore(x, y);
         tree_node_score left_node_query_score = left_node_->GetQueryScore(x, range_middle);
         tree_node_score right_node_query_score = right_node_->GetQueryScore(range_middle + 1, y);
-        tree_node_score current_node_query_score = tree_node_score();
+        tree_node_score current_node_query_score;
         current_node_query_score.left_joint_score = max(left_node_query_score.left_joint_score, left_node_query_score.total_score + right_node_query_score.left_joint_score);
         current_node_query_score.right_joint_score = max(right_node_query_score.right_joint_score, right_node_query_score.total_score + left_node_query_score.right_joint_score);
         current_node_query_score.total_score = left_node_query_score.total_score + right_node_query_score.total_score;
@@ -88,9 +88,9 @@ class TreeNode{
 int main(){
     //Step1: input array A
     int n = 0;
-    cin >> n;
+    scanf("%d", &n);
     for (int i = 0; i < n; ++i)
-        cin >> a[i];
+        scanf("%d", &a[i]);
 
     //Step2: Build Segement Tree
     TreeNode *root = new TreeNode(0, n - 1);
@@ -101,9 +101,9 @@ int main(){
     cin >> m;
     tree_node_score current_score;
     for (int i = 0; i < m; ++i){
-        cin >> x >> y;
+        scanf("%d%d", &x, &y);
         current_score = root->GetQueryScore(x - 1, y - 1);
-        cout << current_score.best_score << endl;
+        printf("%d\n", current_score.best_score);
     }
     return 0;
 }
