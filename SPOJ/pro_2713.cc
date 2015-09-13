@@ -4,9 +4,10 @@
 #include <stdio.h>
 using namespace std;
 
-const int max_num = 100001;
-int a[max_num];
+const int max_num = 100100;
+long long a[max_num];
 long long c[max_num];
+int father[max_num];
 int n, m;
 
 //Low bit function for BIT
@@ -32,24 +33,30 @@ long long GetSum(int k){
 	return answer;
 }
 
+//Union Find
+int find(int k){
+	if (father[k] == k) return k;
+	father[k] = find(father[k]);
+	return father[k];
+}
+
 int main(){
-	int query_type, x, y, temp, count = 1;
+	int count = 0;
 	while (scanf("%d", &n) != EOF){
-		//memset(a, 0, sizeof(a));
-		//memset(c, 0, sizeof(c));
-		printf("Case #%d:\n", count);
 		++count;
-		for (int i = 0; i <= n; ++i) c[i] = 0;
+		printf("Case #%d:\n", count);
+		memset(c, 0, sizeof(c));
+
 
 		//input array A, and initialize array C
-		for (int i = 1; i <= n; ++i){
-			scanf("%d", &a[i]);
-			//ChangeValue(i, static_cast<long long>(a[i]));
-			ChangeValue(i, a[i]);
-		}
+		for (int i = 1; i <= n; ++i) scanf("%lld", &a[i]);
+		for (int i = 1; i <= n; ++i) ChangeValue(i, a[i]);
+		for (int i = 1; i <= n + 1; ++i) father[i] = i;
 
 		//Ask queries
 		scanf("%d", &m);
+		int query_type, x, y, temp;
+		long long pre_value;
 		for (int i = 0; i < m; ++i){
 			scanf("%d%d%d", &query_type, &x, &y);
 			if (x > y){
@@ -57,19 +64,18 @@ int main(){
 			}
 
 			if (query_type == 0){	//modify operation
-				for (int j = x; j <= y; ++j){
-					if (a[j] > 1){
-						temp = a[j];
-						//a[j] = static_cast<int>(floor(sqrt(a[j])));
-						a[j] = (int) floor(sqrt(a[j]));
-						//ChangeValue(j, static_cast<long long>(a[j] - temp));
-						ChangeValue(j, a[j] - temp);
+				int k = find(x);
+				while (k <= y){
+					if (a[k] > 1){
+						pre_value = a[k];
+						a[k] = floor(sqrt(a[k]));
+						ChangeValue(k, a[k] - pre_value);
+						if (a[k] == 1) father[k] = k + 1;
 					}
+					k = find(k + 1);
 				}
 			}
 			if (query_type == 1){	//query operation
-				//long long current_sum = GetSum(y) - GetSum(x - 1);
-				//printf("%lld\n", current_sum);
 				printf("%lld\n", GetSum(y) - GetSum(x - 1));
 			}
 		}
