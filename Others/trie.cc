@@ -1,19 +1,15 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
 class TrieNode {
 public:
-    TrieNode** children_;
+    map<char, TrieNode*> children_;
     bool is_word_;
     // Initialize your data structure here.
     TrieNode() {
-        children_ = new TrieNode*[26];
+        //map.clear();
         is_word_ = false;
-    }
-    ~TrieNode(){
-        for (int i = 0; i < 26; ++i)
-            delete children_[i];
-        delete[] children_;
     }
 };
 
@@ -32,7 +28,6 @@ public:
             cur = cur->children_[word[i] - 'a'];
         }
         cur->is_word_ = true;
-        cout << "insert = " << word << endl;
     }
 
     // Returns if the word is in the trie.
