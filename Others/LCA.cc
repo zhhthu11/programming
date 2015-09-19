@@ -24,7 +24,7 @@ public:
         }
         return ret;
     }
-    
+
     string find(TreeNode* root, TreeNode* goal){
         if (root == goal) return "";
         if (root->left){
@@ -42,10 +42,8 @@ public:
 int main(){
     Solution my_solution;
     TreeNode *root = new TreeNode(5);
-    TreeNode *p, *q;
-    p = new TreeNode(1);
+    TreeNode *p = new TreeNode(1), *q = new TreeNode(10);
     root->left = p;
-    q = new TreeNode(10);
     root->right = q;
     TreeNode *ret = my_solution.lowestCommonAncestor(root, p, q);
     cout << "ret value = " << ret->val << endl;
