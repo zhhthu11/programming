@@ -10,5 +10,6 @@ void test_map(){
 
 int main(){
     test_map();
+    cout << "check.." << endl;
     return 0;
 }
