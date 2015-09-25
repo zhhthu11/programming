@@ -41,7 +41,7 @@ int main(){
 		record[i][i] = 0;
 
 	scanf("%d", &T);
-	gets(s);
+	gets(s);    //important
 	for (int i = 0; i < T; ++i){
 		gets(s);
 		start_pos = (s[0] - 'a') * 8 + (s[1] - '1');
