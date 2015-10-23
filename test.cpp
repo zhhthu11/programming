@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <map>
 #include <unordered_map>
+#include <string>
 using namespace std;
 
 void test_map(){
