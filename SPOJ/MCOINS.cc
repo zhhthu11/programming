@@ -21,6 +21,6 @@ int main(){
 		if (pos[0] == 1) ans += "A";
 		else ans += "B";
 	}
-	cout << ans << endl;
+	printf("%s\n", ans.c_str());
 	return 0;
 }
