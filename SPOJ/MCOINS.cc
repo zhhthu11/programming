@@ -5,22 +5,26 @@ using namespace std;
 int pos[1000020];
 
 int main(){
-	int k, l, m, n;
+	int k, l, m, a[50], n = -1;
 	scanf("%d%d%d", &k, &l, &m);
-	string ans = "";
 	for (int i = 0; i < m; ++i){
-		scanf("%d", &n);
-		for (int j = n + 1; j < n + 10; ++j) pos[j] = 1;
-		pos[n] = 0;
-		for (int j = n - 1; j >= 0; --j){
-			if (pos[j + 1] == 0 || pos[j + k] == 0 || pos[j + l] == 0)
-				pos[j] = 1;		//win
-			else
-				pos[j] = 0;		//lose
-		}
-		if (pos[0] == 1) ans += "A";
-		else ans += "B";
+		scanf("%d", &a[i]);
+		if (a[i] > n) n = a[i];
 	}
-	printf("%s\n", ans.c_str());
+
+	for (int j = n + 1; j < n + 10; ++j) pos[j] = 1;
+	pos[n] = 0;
+	for (int j = n - 1; j >= 0; --j){
+		if (pos[j + 1] == 0 || pos[j + k] == 0 || pos[j + l] == 0)
+			pos[j] = 1;		//win
+		else
+			pos[j] = 0;		//lose
+	}
+
+	string ans = "";
+	for (int i = 0; i < m; ++i)
+		if (pos[n - a[i]] == 1) ans += "A";
+		else ans += "B";
+	cout << ans << endl;
 	return 0;
 }
