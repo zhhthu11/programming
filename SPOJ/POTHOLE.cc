@@ -87,8 +87,13 @@ int main(){
 
 		//============MaxFlow============
 		ans = 0;
-		while(bfs(0, n - 1))
-			ans += dfs(0, n - 1, INT_MAX);
+		while(bfs(0, n - 1)){
+			while (true){
+				int t = dfs(0, n - 1, INT_MAX);
+				if (t == 0) break;
+				ans += t;
+			}
+		}
 		cout << ans << endl;
 	}
 	return 0;
